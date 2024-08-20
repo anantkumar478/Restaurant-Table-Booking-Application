@@ -7,9 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/rating-reviews")
+@RequestMapping("/api/ratingreviews")
 public class RatingReviewController {
 
     @Autowired
@@ -17,11 +18,6 @@ public class RatingReviewController {
 
     @PostMapping
     public ResponseEntity<RatingReview> createRatingReview(@RequestBody RatingReview ratingReview) {
-        // Validate that the review field is not null
-        if (ratingReview.getReviews() == null || ratingReview.getReviews().isEmpty()) {
-            return ResponseEntity.badRequest().body(null);
-        }
-
         RatingReview createdRatingReview = ratingReviewService.addRatingReview(ratingReview);
         return ResponseEntity.ok(createdRatingReview);
     }
@@ -30,5 +26,15 @@ public class RatingReviewController {
     public ResponseEntity<List<RatingReview>> getAllRatingReviews() {
         List<RatingReview> ratingReviews = ratingReviewService.getAllRatingReviews();
         return ResponseEntity.ok(ratingReviews);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RatingReview> getRatingReviewById(@PathVariable("id") Long id) {
+        Optional<RatingReview> ratingReview = ratingReviewService.getAllRatingReviews()
+                .stream()
+                .filter(rr -> rr.getRatingId().equals(id))
+                .findFirst();
+        return ratingReview.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

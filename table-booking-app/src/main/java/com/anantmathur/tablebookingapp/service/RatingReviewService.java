@@ -23,8 +23,8 @@ public class RatingReviewService {
 
     public RatingReview addRatingReview(RatingReview ratingReview) {
         // Ensure that the restaurant and user exist
-        if (restaurantRepository.findById(ratingReview.getRestaurant().getId()).isEmpty() ||
-                userRepository.findById(ratingReview.getUser().getId()).isEmpty()) {
+        if (restaurantRepository.findById(ratingReview.getRestaurant().getRestaurantId()).isEmpty() ||
+                userRepository.findById(ratingReview.getUser().getUserId()).isEmpty()) {
             throw new RuntimeException("Invalid restaurant or user ID.");
         }
 

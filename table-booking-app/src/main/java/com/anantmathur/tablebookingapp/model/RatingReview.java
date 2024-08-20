@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Data
+@Table(name = "rating_review")
+@Data // Lombok annotation to generate getters, setters
 public class RatingReview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "rating_id")
     private Long ratingId;
 
     @ManyToOne
@@ -19,10 +21,9 @@ public class RatingReview {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private Integer rating;  // Ensure this field allows null if not always required
+    @Column(name = "rating", nullable = false)
+    private int rating;
 
-    @Column(nullable = false)
-    private String reviews;  // Ensure this field is not null and is set in your payload
-
-    // getters and setters
+    @Column(name = "review", nullable = false)
+    private String review;
 }

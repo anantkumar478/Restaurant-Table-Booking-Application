@@ -32,7 +32,5 @@ public class User {
     @Column(name = "user_address")
     private String userAddress;
 
-    public Long getId() {
-        return null;
-    }
+
 }

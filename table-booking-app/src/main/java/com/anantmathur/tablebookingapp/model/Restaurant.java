@@ -32,7 +32,4 @@ public class Restaurant {
     @Column(name = "restaurant_city")
     private String restaurantCity;
 
-    public Long getId() {
-        return null;
-    }
 }
