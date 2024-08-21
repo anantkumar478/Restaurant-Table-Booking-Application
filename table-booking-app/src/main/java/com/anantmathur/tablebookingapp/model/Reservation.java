@@ -38,3 +38,5 @@ public class Reservation {
     @Column(name = "party_size", nullable = false)
     private int partySize;  // Number of people for the reservation
 }
+
+
