@@ -39,12 +39,12 @@ class UserServiceTest {
 
     @Test
     void testGetUserById() {
-        User user = new User(1L, "John Doe", "john@example.com", "password", "1234567890", "123 Main St");
-        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        User user = new User(5L, "Rohit", "rohit@gmail.com", "rhanst", "7334582354", "Chennai");
+        when(userRepository.findById(5L)).thenReturn(Optional.of(user));
 
-        Optional<User> foundUser = userService.getUserById(1L);
+        Optional<User> foundUser = userService.getUserById(5L);
         assertTrue(foundUser.isPresent());
-        assertEquals("John Doe", foundUser.get().getUserName());
+        assertEquals("Rohit", foundUser.get().getUserName());
     }
 
     @Test
