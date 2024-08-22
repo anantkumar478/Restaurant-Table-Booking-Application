@@ -1,11 +1,14 @@
 package com.anantmathur.tablebookingapp.service;
 
+import com.anantmathur.tablebookingapp.dto.ReservationResponseDTO;
 import com.anantmathur.tablebookingapp.model.Reservation;
 import com.anantmathur.tablebookingapp.model.RestaurantTable;
 import com.anantmathur.tablebookingapp.repository.ReservationRepository;
 import com.anantmathur.tablebookingapp.repository.TableRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,21 +22,32 @@ public class ReservationService {
     @Autowired
     private TableRepository tableRepository;
 
-    public Reservation addReservation(Reservation reservation) {
-        // Check if the reservation already has a reservedTable
+    public ReservationResponseDTO createReservation(Reservation reservation) {
+        // Validate the reserved table
         if (reservation.getReservedTable() == null || reservation.getReservedTable().getTableId() == null) {
-            throw new RuntimeException("Reserved table must be provided and must exist.");
+            throw new IllegalArgumentException("Reserved table must be provided and must exist.");
         }
 
-        // Fetch the table by ID to ensure it exists
+        // Fetch the table by ID
         RestaurantTable reservedTable = tableRepository.findById(reservation.getReservedTable().getTableId())
-                .orElseThrow(() -> new RuntimeException("Table not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Table not found"));
 
         // Set the fetched table in the reservation
         reservation.setReservedTable(reservedTable);
 
         // Save the reservation
-        return reservationRepository.save(reservation);
+        Reservation savedReservation = reservationRepository.save(reservation);
+
+        // Map to ReservationResponseDTO
+        return new ReservationResponseDTO(
+                savedReservation.getReservationID(),
+                savedReservation.getUser().getUserId(),
+                savedReservation.getReservedTable().getTableId(),
+                savedReservation.getRestaurant().getRestaurantId(),
+                savedReservation.getReservationDate(),
+                savedReservation.getReservationTime(),
+                savedReservation.getPartySize()
+        );
     }
 
     public List<Reservation> getAllReservations() {
@@ -43,4 +57,8 @@ public class ReservationService {
     public Optional<Reservation> getReservationById(Long id) {
         return reservationRepository.findById(id);
     }
+
+
 }
+
+

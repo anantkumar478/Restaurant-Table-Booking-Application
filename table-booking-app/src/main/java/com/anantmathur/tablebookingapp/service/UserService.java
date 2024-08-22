@@ -14,6 +14,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
     public User addUser(User user) {
         return userRepository.save(user);
     }
@@ -31,10 +32,12 @@ public class UserService {
             user.setUserId(id);
             return userRepository.save(user);
         }
-        return null; // Handle this case according to your requirements
+        return null;
     }
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 }
+
+

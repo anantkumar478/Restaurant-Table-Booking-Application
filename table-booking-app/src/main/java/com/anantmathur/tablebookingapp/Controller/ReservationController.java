@@ -1,5 +1,6 @@
 package com.anantmathur.tablebookingapp.Controller;
 
+import com.anantmathur.tablebookingapp.dto.ReservationResponseDTO;
 import com.anantmathur.tablebookingapp.model.Reservation;
 import com.anantmathur.tablebookingapp.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,8 @@ public class ReservationController {
     private ReservationService reservationService;
 
     @PostMapping
-    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
-        // Ensure that the reservation contains a valid reservedTable ID
-        if (reservation.getReservedTable() == null || reservation.getReservedTable().getTableId() == null) {
-            return ResponseEntity.badRequest().body(null);
-        }
-
-        Reservation createdReservation = reservationService.addReservation(reservation);
+    public ResponseEntity<ReservationResponseDTO> createReservation(@RequestBody Reservation reservation) {
+        ReservationResponseDTO createdReservation = reservationService.createReservation(reservation);
         return ResponseEntity.ok(createdReservation);
     }
 
@@ -40,3 +36,5 @@ public class ReservationController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
+
+

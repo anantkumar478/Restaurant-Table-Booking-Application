@@ -32,5 +32,4 @@ public class User {
     @Column(name = "user_address")
     private String userAddress;
 
-
 }

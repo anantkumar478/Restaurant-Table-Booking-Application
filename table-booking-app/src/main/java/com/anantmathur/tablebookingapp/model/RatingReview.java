@@ -26,4 +26,5 @@ public class RatingReview {
 
     @Column(name = "review", nullable = false)
     private String review;
+
 }

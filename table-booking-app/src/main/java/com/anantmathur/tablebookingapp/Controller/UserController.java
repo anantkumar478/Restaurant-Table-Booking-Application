@@ -1,5 +1,6 @@
 package com.anantmathur.tablebookingapp.Controller;
 
+import com.anantmathur.tablebookingapp.dto.UserDTO;
 import com.anantmathur.tablebookingapp.model.User;
 import com.anantmathur.tablebookingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

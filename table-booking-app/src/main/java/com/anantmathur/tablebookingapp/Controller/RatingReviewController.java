@@ -1,5 +1,6 @@
 package com.anantmathur.tablebookingapp.Controller;
 
+import com.anantmathur.tablebookingapp.dto.RatingReviewDTO;
 import com.anantmathur.tablebookingapp.model.RatingReview;
 import com.anantmathur.tablebookingapp.service.RatingReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class RatingReviewController {
     private RatingReviewService ratingReviewService;
 
     @PostMapping
-    public ResponseEntity<RatingReview> createRatingReview(@RequestBody RatingReview ratingReview) {
-        RatingReview createdRatingReview = ratingReviewService.addRatingReview(ratingReview);
+    public ResponseEntity<RatingReviewDTO> createRatingReview(@RequestBody RatingReview ratingReview) {
+        RatingReviewDTO createdRatingReview = ratingReviewService.addRatingReview(ratingReview);
         return ResponseEntity.ok(createdRatingReview);
     }
 

@@ -1,5 +1,9 @@
 package com.anantmathur.tablebookingapp.dto;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+
 public class ReservationResponseDTO {
 
     private Long reservationID;  // Primary Key, Auto-Increment

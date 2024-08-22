@@ -18,7 +18,7 @@ public class Restaurant {
     private Long restaurantId;
 
     @Column(name = "restaurant_name", nullable = false)
-    private String restaurantName;
+    private String restaurantName;  // Ensure this is not null
 
     @Column(name = "restaurant_location")
     private String restaurantLocation;
@@ -31,5 +31,4 @@ public class Restaurant {
 
     @Column(name = "restaurant_city")
     private String restaurantCity;
-
 }
