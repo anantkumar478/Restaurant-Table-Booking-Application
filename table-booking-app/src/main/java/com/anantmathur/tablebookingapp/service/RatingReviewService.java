@@ -50,4 +50,5 @@ public class RatingReviewService {
     public List<RatingReview> getAllRatingReviews() {
         return ratingReviewRepository.findAll();
     }
+
 }

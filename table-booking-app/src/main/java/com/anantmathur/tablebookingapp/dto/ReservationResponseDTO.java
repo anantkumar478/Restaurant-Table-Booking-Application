@@ -71,4 +71,8 @@ public class ReservationResponseDTO {
     public void setPartySize(int partySize) {
         this.partySize = partySize;
     }
+
+    public long getTableId() {
+        return tableID;
+    }
 }
